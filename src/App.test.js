@@ -16,3 +16,13 @@ test("updates text when button is clicked", async () => {
   const updatedText = screen.getByText(/you clicked the button!/i);
   expect(updatedText).toBeInTheDocument();
 });
+
+// 新規追加: クリック回数のテストケース
+test("increments click count", async () => {
+  render(<App />);
+  const button = screen.getByRole("button", { name: /click me/i });
+  await userEvent.click(button);
+  // 新規追加: クリック回数が1になっていることを確認
+  const countText = screen.getByText(/クリック回数: 1/i);
+  expect(countText).toBeInTheDocument();
+});
